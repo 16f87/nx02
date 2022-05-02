@@ -17,8 +17,6 @@ class BOOKS_DATA_CLASS {
 		$this->autor=$autor;
 		$this->lector=$lector;
 		$this->borrowed_date=$borrowed_date;
-
-
 	}
 
 public static function GET_ALL_BOOKS($conexion) {
