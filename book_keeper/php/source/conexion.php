@@ -4,7 +4,7 @@ class Conexion {
 	private $kind_of_db = 'mysql';
 	private $host = 'localhost';
 	private $name_of_db = 'book_keeper';
-	private $user = '';
+	private $user = 'root';
 	private $password = '';
 
 
