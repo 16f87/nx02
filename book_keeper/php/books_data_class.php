@@ -9,9 +9,8 @@ class BOOKS_DATA_CLASS {
 	private $lector;
 	private $borrowed_date;
 	public const TABLE_BOOKS = 'books';
-    //------------------------------------------------------------->
-	public function __construct($id=null, $titulo = null,$autor = null,$lector = null,$borrowed_date = null) {
-
+	//------------------------------------------------------------------------>
+public function __construct($id=null, $titulo = null,$autor = null,$lector = null,$borrowed_date = null) {
 		$this->id=$id;
 		$this->titulo=$titulo;
 		$this->autor=$autor;

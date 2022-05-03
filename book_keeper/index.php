@@ -35,9 +35,8 @@
 
         <div class="w3-white w3-text-grey w3-card-4">
           <div class="w3-display-container">
-            <img src="/assets/book_keeper_logo.jpg" style="width:100%" alt="Avatar">
+            <img src="assets/images/logo.png" style="width:100%" alt="Avatar">
             <div class="w3-display-bottomleft w3-container w3-text-black">
-              <h2>Jane Doe</h2>
             </div>
           </div>
           <div class="w3-container">
@@ -91,25 +90,43 @@
       <!-- Right Column -->
       <div class="w3-twothird">
 
+
+
+        <!------------------------ Modulo MIS LIBROS --------------------------->
+
         <div class="w3-container w3-card w3-white w3-margin-bottom">
 
 
 
-          <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>My library</h2>
-
-
+          <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Mis libros</h2>
 
 
 
 
           <div class="w3-container">
-            <h5 class="w3-opacity"><b>Libros que tengo disponibles.</b></h5>
+            <!-- Navbar -->
+            <div class="w3-bar">
+              <a class="w3-margin-top w3-bar-item w3-hide-small">Buscar por</a>
+              <div class="w3-dropdown-hover w3-hide-small">
+                <button class="w3-margin-top w3-button" title="More">Titulo <i class="fa fa-caret-down"></i></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                  <a href="#" class="w3-bar-item w3-button">Titulo</a>
+                  <a href="#" class="w3-bar-item w3-button">Autor</a>
+                  <a href="#" class="w3-bar-item w3-button">Genero</a>
+                </div>
+              </div>
+
+              <input class="w3-input w3-border w3-round-large w3-bar-item w3-margin-top w3-margin-bottom" type="text">
+              <a href="javascript:void(0)" class=" w3-bar-item w3-padding-large w3-hover-red w3-margin-top w3-margin-bottom"><i class="fa fa-search"></i></a>
+              <button class="w3-margin-top w3-round-large w3-button w3-right w3-bar-item">Nuevo libro</button>
+            </div>
+            <!-- END Navbar -->
             <table class="w3-table-all w3-card">
               <tr>
                 <th>Titulo</th>
                 <th>Autor</th>
                 <th>Lector</th>
-                <th>Borrowed Date</th>
+                <th>Estado</th>
               </tr>
               <?php
               include_once 'php/books_data_class.php';
@@ -127,14 +144,15 @@
                   $borrowed_date = $item['borrowed_date'];
                   //<td><img src="assets/images/books/icono'.$icono_id.'.png"   alt="icono0"></td>
                   echo '<tr>
-      <td>' . $titulo . '</td>
-      <td>' . $autor . '</td>
-      <td>' . $borrowed_date . '</td>
-    </tr>';
+                  <td>' . $titulo . '</td>
+                  <td>' . $autor . '</td>
+                  <td>' . $borrowed_date . '</td>
+                  <td></td>
+                </tr>';
                 }
               } else {
 
-                echo "howrwerwerla";
+                echo "No hay datos para mostrar";
                 return "e-1";
               }
               Conexion::closeDbConection();
@@ -144,33 +162,61 @@
             <hr>
           </div>
 
-
-
-
-
-
-
-          <div class="w3-container">
-            <h5 class="w3-opacity"><b>Web Developer / something.com</b></h5>
-            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2012 - Dec 2014</h6>
-            <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
-          
-          
-          
-            <hr>
-          </div>
-
-
-
-          <div class="w3-container">
-            <h5 class="w3-opacity"><b>Graphic Designer / designsomething.com</b></h5>
-            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2010 - Mar 2012</h6>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><br>
-          </div>
+          <!--------------------------------------------------->
         </div>
-
+        <!---------------------------------------- END Modulo MIS LIBROS ------------------------------------------------------------->
+        <!---------------------------------------- Modulo PRESTAR LIBRO  ------------------------------------------------------------->
         <div class="w3-container w3-card w3-white">
-          <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
+
+          <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Prestar libro</h2>
+
+          <table class="w3-table-all w3-card">
+            <tr>
+              <th>Amigo</th>
+              <th>Titulo</th>
+              <th>Tiempo</th>
+              <th>Alertas</th>
+            </tr>
+            <?php
+            include_once 'php/books_data_class.php';
+            include_once 'php/source/conexion.php';
+
+            $books_data_array = BOOKS_DATA_CLASS::GET_ALL_BOOKS(Conexion::getinstance());
+
+            if (count($books_data_array) > 0) {
+              foreach ($books_data_array as $item) {
+
+
+                $titulo = $item['titulo'];
+                $autor = $item['autor'];
+                $lector = $item['lector'];
+                $borrowed_date = $item['borrowed_date'];
+                //<td><img src="assets/images/books/icono'.$icono_id.'.png"   alt="icono0"></td>
+                echo '<tr>
+                  <td>' . $titulo . '</td>
+                  <td>' . $autor . '</td>
+                  <td>' . $borrowed_date . '</td>
+                  <td></td>
+                </tr>';
+              }
+            } else {
+
+              echo "No hay datos para mostrar";
+              return "e-1";
+            }
+            Conexion::closeDbConection();
+            ?>
+
+          </table>
+          <hr>
+
+
+
+
+
+
+
+
           <div class="w3-container">
             <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
             <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
@@ -188,8 +234,10 @@
             <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
             <p>Bachelor Degree</p><br>
           </div>
-        </div>
 
+
+        </div>
+        <!---------------------------------------- END PRESTAR LIBRO  ------------------------------------------------------------->
         <!-- End Right Column -->
       </div>
 
